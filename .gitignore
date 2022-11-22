@@ -7,7 +7,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -58,9 +57,9 @@ target/
 
 # Downstream Project
 downloaded/
-geoserver/
 uploaded/
 static_root/
+/geoserver/
 development.db
 development.db-journal
 local_settings.py
@@ -73,4 +72,4 @@ local_settings.py
 # Sass
 .sass-cache
 
-.env
+/_geoserver_admin_pwd.info

@@ -14,23 +14,6 @@ echo GEOSERVER_PUBLIC_LOCATION=$GEOSERVER_PUBLIC_LOCATION
 /usr/local/bin/invoke waitfordbs
 echo "waitfordbs task done"
 
-echo "running migrations"
-/usr/local/bin/invoke migrations
-echo "migrations task done"
-
-if [ ! -e "/mnt/volumes/statics/geonode_init.lock" ]; then
-    /usr/local/bin/invoke prepare
-    echo "prepare task done"
-    /usr/local/bin/invoke fixtures
-    echo "fixture task done"
-fi
-/usr/local/bin/invoke initialized
-echo "initialized"
-
-echo "refresh static data"
-/usr/local/bin/invoke statics
-echo "static data refreshed"
-
 cmd="$@"
 
 echo DOCKER_ENV=$DOCKER_ENV
@@ -49,6 +32,21 @@ else
         echo "Executing Celery server $cmd for Production"
 
     else
+
+        if [ ! -e "/mnt/volumes/statics/geonode_init.lock" ]; then
+            /usr/local/bin/invoke prepare
+            echo "prepare task done"
+            echo "running migrations"
+            /usr/local/bin/invoke migrations
+            echo "migrations task done"
+            /usr/local/bin/invoke fixtures
+            echo "fixture task done"
+            echo "refresh static data"
+            /usr/local/bin/invoke statics
+            echo "static data refreshed"
+            /usr/local/bin/invoke initialized
+            echo "initialized"
+        fi
 
         cmd=$UWSGI_CMD
         echo "Executing UWSGI server $cmd for Production"

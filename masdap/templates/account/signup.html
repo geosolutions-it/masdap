@@ -6,10 +6,6 @@
 
 {% block title %}{% trans "Sign up" %}{% endblock %}
 
-{% block extra_head %}
-<script src='https://www.google.com/recaptcha/api.js'></script>
-{% endblock %}
-
 {% block page-title %}
 <div class="banner">
   <div class="container">
@@ -30,13 +26,14 @@
 {% endif %}
 <form id="signup_form" method="post" action="{% url "account_signup" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
   <fieldset>
-    {% csrf_token %}
-    {{ form|as_bootstrap }}
-    {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <div class="g-recaptcha" data-sitekey="6LdRASkTAAAAAK8YOn0MymwI5IHTqKeWbgspciEB"></div>
-    <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
+      {% csrf_token %}
+      {{ form|as_bootstrap }}
+      {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class="form-actions">
+          <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
+      </div>
   </fieldset>
 </form>
 {% endblock %}
