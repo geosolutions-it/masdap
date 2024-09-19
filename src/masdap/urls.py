@@ -18,16 +18,13 @@
 #
 #########################################################################
 
-from django.conf.urls import url, include
-from django.views.generic import TemplateView
+from django.urls import re_path
 
 from geonode.urls import urlpatterns
 
 from . import views
-# You can register your own urlpatterns here
-urlpatterns = [
-#    url(r'^/?$',
-#        TemplateView.as_view(template_name='site_index.html'),
-#        name='home'),
-   url(r'^contact/', views.contact, name='contact'),
- ] + urlpatterns
+
+
+urlpatterns += [
+   re_path(r'^contact/', views.contact, name='contact'),
+ ]

@@ -1,8 +1,8 @@
 from django import forms
-from django.conf import settings
-from django.utils.translation import ugettext as _
+# from django.conf import settings
+# from django.utils.translation import gettext as _
 
-from captcha.fields import ReCaptchaField
+from django_recaptcha.fields import ReCaptchaField
 
 class ContactForm(forms.Form):
 	name = forms.CharField(max_length=100)
